@@ -1,0 +1,16 @@
+
+sonInLaw(A,B) :- spouse(A,C),daughter(D,C),spouse(D,B)
+
+sonInLaw(Me,Frank) :- spouse(Me,Wendy),daughter(Darla, Wendy),spouse(Darla,Frank)
+
+motherInLaw(A,B) :- son(C,A),spouse(C,B)
+
+motherInLaw(Me,Darla) :- son(Frank,Me),spouse(Frank,Darla)
+
+grandMother(A,B) :- son(C,A),spouse(C,D),daughter(D,B)
+
+grandMother(Me,Wendy) :- son(Frank,Me),spouse(Frank,Darla),daughter(Darla,Wendy)
+
+grandFather(A,B) :- grandMother(A,C),spouse(C,B)
+
+grandFather(Me,Me) :- grandMother(Me,Wendy),spouse(Wendy,Me)
