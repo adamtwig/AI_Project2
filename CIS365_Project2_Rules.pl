@@ -91,40 +91,50 @@ locationConflict(L, T, D) :- course(A, _, T, _, D, L, _, _), course(B, _, T, _, 
 
 /*----- Goal -----*/
 print_solution :-
-write('1. What does Dr. J. Leidig teach?'), nl,
-findall(C, taughtBy('Dr. J. Leidig', C), Query1),
-write(Query1), nl, nl,
-write('2. Does Dr. J. Leidig teach Database?'), nl,
-(taughtBy('Dr. J. Leidig', '353') -> Query2 = true ; Query2 = false),
-write(Query2), nl, nl,
-write("3. What is Dr. J. Leidig's schedule?"), nl,
-findall((S, E, D), course(_, _, S, E, D, _, 'Dr. J. Leidig', _), Query3),
-write(Query3), nl, nl,
-write('4. Who is scheduled to teach what subject on TR, 10am?'), nl,
-findall((P, X), teachesAtTime(P, X, '10:00 am', 'TR'), Query4),
-write(Query4), nl, nl,
-write('5. When do Dr. J. Leidig and Dr. El-Said teach at the same time?'), nl,
-setof((W, Y), teachAtSameTime('Dr. J. Leidig', 'Dr. El-Said', W, Y), Query5),
-write(Query5), nl, nl,
-write('6. Who teaches at the same time as Dr. J. Leidig?'), nl,
-findall(A, teachAtSameTime('Dr. J. Leidig', A, _, _), Query6),
-%findall(A, allTeachAtSameTime('Dr. J. Leidig', A, _, _), Query6),
-write(Query6), nl, nl,
-write('7. What courses do Jim and Pam have in common?'), nl,
-findall(B, haveSameCourse('Jim', 'Pam', B), Query7),
-write(Query7), nl, nl,
-write('8. Who is taking CS Courses?'), nl,
-setof(F, inCourse(F, 'CS'), Query8),
-write(Query8), nl, nl,
-write('9. What types of courses are Gaius Baltar taking?'), nl,
-setof(G, inCourse('Gaius Baltar', G), Query9),
-write(Query9), nl, nl,
-write('10. Are there any scheduling conflicts of professors or locations?'), nl,
-write('Schedule Conflicts:'), nl,
-setof((J, K, L), scheduleConflict(J, K, L), Query10),
-write(Query10), nl,
-write('Location Conflicts:'), nl,
-setof((M, N, Q), locationConflict(M, N, Q), Query11),
-write(Query11), nl.
+
+	write('1. What does Dr. J. Leidig teach?'), nl,
+	findall(C, taughtBy('Dr. J. Leidig', C), Query1),
+	write(Query1), nl, nl,
+
+	write('2. Does Dr. J. Leidig teach Database?'), nl,
+	(taughtBy('Dr. J. Leidig', '353') -> Query2 = true ; Query2 = false),
+	write(Query2), nl, nl,
+
+	write("3. What is Dr. J. Leidig's schedule?"), nl,
+	findall((S, E, D), course(_, _, S, E, D, _, 'Dr. J. Leidig', _), Query3),
+	write(Query3), nl, nl,
+
+	write('4. Who is scheduled to teach what subject on TR, 10am?'), nl,
+	findall((P, X), teachesAtTime(P, X, '10:00 am', 'TR'), Query4),
+	write(Query4), nl, nl,
+
+	write('5. When do Dr. J. Leidig and Dr. El-Said teach at the same time?'), nl,
+	setof((W, Y), teachAtSameTime('Dr. J. Leidig', 'Dr. El-Said', W, Y), Query5),
+	write(Query5), nl, nl,
+
+	write('6. Who teaches at the same time as Dr. J. Leidig?'), nl,
+	findall(A, teachAtSameTime('Dr. J. Leidig', A, _, _), Query6),
+	write(Query6), nl, nl,
+
+	write('7. What courses do Jim and Pam have in common?'), nl,
+	findall(B, haveSameCourse('Jim', 'Pam', B), Query7),
+	write(Query7), nl, nl,
+
+	write('8. Who is taking CS Courses?'), nl,
+	setof(F, inCourse(F, 'CS'), Query8),
+	write(Query8), nl, nl,
+
+	write('9. What types of courses are Gaius Baltar taking?'), nl,
+	setof(G, inCourse('Gaius Baltar', G), Query9),
+	write(Query9), nl, nl,
+
+	write('10. Are there any scheduling conflicts of professors or locations?'), nl,
+	write('Schedule Conflicts:'), nl,
+	setof((J, K, L), scheduleConflict(J, K, L), Query10),
+	write(Query10), nl,
+	
+	write('Location Conflicts:'), nl,
+	setof((M, N, Q), locationConflict(M, N, Q), Query11),
+	write(Query11), nl.
 
 ?- print_solution.
